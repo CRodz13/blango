@@ -1,6 +1,10 @@
 from django.contrib import admin
-from blog.models import Post, PostAdmin, Tag
+from blog.models import Comment, Post, PostAdmin, Tag
+
+class PostAdmin(admin.ModelAdmin):
+  prepopulated_fields = {"slug": ("title",)}
 
 # Register your models here.
 admin.site.register(Tag)
 admin.site.register(Post, PostAdmin)
+admin.site.register(Comment)
