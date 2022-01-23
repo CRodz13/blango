@@ -6,10 +6,10 @@ from django.contrib.contenttypes.models import ContentType
 
 # Create your models here.
 class Tag(models.Model):
-  value = models.TextField(max_length=100)
+    value = models.TextField(max_length=100)
 
-  def __str__(self):
-    return self.value
+    def __str__(self):
+      return self.value
 
 
 class Comment(models.Model):
@@ -22,20 +22,20 @@ class Comment(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
 
 class Post(models.Model):
-  author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
-  created_at = models.DateTimeField(auto_now_add=True)
-  modified_at = models.DateTimeField(auto_now=True)
-  published_at = models.DateTimeField(blank=True, null=True)
-  title = models.TextField(max_length=100)
-  slug = models.SlugField()
-  summary = models.TextField(max_length=500)
-  content = models.TextField()
-  tags = models.ManyToManyField(Tag, related_name="posts")
-  comments = GenericRelation(Comment)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+    published_at = models.DateTimeField(blank=True, null=True)
+    title = models.TextField(max_length=100)
+    slug = models.SlugField()
+    summary = models.TextField(max_length=500)
+    content = models.TextField()
+    tags = models.ManyToManyField(Tag, related_name="posts")
+    comments = GenericRelation(Comment)
   
-  def __str__(self):
-    return self.title
+    def __str__(self):
+      return self.title
 
 
 class PostAdmin(admin.ModelAdmin):
-  prepopulated_fields = {"slug": ("title",)}
+    prepopulated_fields = {"slug": ("title",)}
